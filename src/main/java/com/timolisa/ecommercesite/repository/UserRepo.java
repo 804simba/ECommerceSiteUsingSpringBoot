@@ -1,4 +1,4 @@
-package com.timolisa.ecommercesite.Repository;
+package com.timolisa.ecommercesite.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

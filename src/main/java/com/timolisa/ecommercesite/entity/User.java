@@ -8,26 +8,13 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity(name = "user")
-@Table(
-        name = "users",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "user_email_unique", columnNames = "email")
-        }
-)
+@Table(name = "users")
 @NoArgsConstructor
 @Getter
 @Setter
 public class User {
-
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE, generator = "user_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", updatable = false)
     private Long userID;
     @Column(name = "first_name", nullable = false, columnDefinition = "TEXT")

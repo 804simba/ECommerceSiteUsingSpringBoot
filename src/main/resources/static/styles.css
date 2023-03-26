@@ -1,0 +1,147 @@
+/* Index page */
+.product-card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.product-card .card-body {
+    padding: 10px;
+}
+
+.product-card h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.product-card .btn {
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+/* Product detail */
+.product-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.product-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.product-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.product-price {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.product-add-to-cart {
+    margin-bottom: 20px;
+}
+/* Empty cart */
+.empty-cart-message {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.empty-cart-actions {
+    margin-bottom: 20px;
+}
+/* cart page */
+.cart-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.cart-item-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.cart-item-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.cart-item-price {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.cart-item-quantity {
+    margin-bottom: 10px;
+}
+
+.cart-item-actions {
+    margin-bottom: 10px;
+}
+
+.cart-item-remove {
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+}
+
+.cart-item-total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.cart-total {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cart-actions {
+    margin-bottom: 20px;
+}
+/* dashboard */
+.action-buttons {
+    margin-bottom: 20px;
+}
+
+.btn-add {
+    margin-right: 10px;
+}
+
+.btn-edit,
+.btn-delete {
+    margin-right: 5px;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+.form-control {
+    width: 100%;
+}

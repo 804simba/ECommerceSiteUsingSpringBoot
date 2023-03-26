@@ -14,14 +14,7 @@ import java.util.List;
 @Setter @Getter
 public class Product {
     @Id
-    @SequenceGenerator(
-            name = "product_sequence",
-            sequenceName = "product_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE, generator = "product_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
@@ -32,9 +25,8 @@ public class Product {
     private String description;
     @Column(nullable = false)
     private String category;
-    @Lob
-    @Column(nullable = false)
-    private byte[] image;
+    @Column(name = "imageURL", nullable = false, columnDefinition = "text")
+    private String imageURL;
     @OneToMany(mappedBy = "product")
     private List<OrderItem> orderItems;
 }
