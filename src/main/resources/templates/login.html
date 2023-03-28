@@ -2,11 +2,9 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Ecommerce Home Page</title>
+  <title>Login</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
 <div class="container">
@@ -21,7 +19,7 @@
           <a class="nav-link" th:href="@{/index}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/cart}">Cart</a>
+          <a class="nav-link" th:href="@{/register}">Register</a>
         </li>
       </ul>
     </div>
@@ -30,36 +28,23 @@
 
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-4">
-      <div class="product-card">
-        <img src="https://via.placeholder.com/300x200.png?text=Product+1" alt="Product 1">
-        <div class="card-body">
-          <h5>Product 1</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <p>$19.99</p>
-          <button class="btn btn-primary">Add to Cart</button>
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <h4>Login</h4>
         </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="product-card">
-        <img src="https://via.placeholder.com/300x200.png?text=Product+2" alt="Product 2">
         <div class="card-body">
-          <h5>Product 2</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <p>$29.99</p>
-          <button class="btn btn-primary">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="product-card">
-        <img src="https://via.placeholder.com/300x200.png?text=Product+3" alt="Product 3">
-        <div class="card-body">
-          <h5>Product 3</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <p>$39.99</p>
-          <button class="btn btn-primary">Add to Cart</button>
+          <form method="post" th:object="user">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" th:field="*{email}" class="form-control" id="username">
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" th:field="*{password}" class="form-control" id="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
         </div>
       </div>
     </div>

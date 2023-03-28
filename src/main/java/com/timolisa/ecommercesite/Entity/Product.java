@@ -1,4 +1,4 @@
-package com.timolisa.ecommercesite.entity;
+package com.timolisa.ecommercesite.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,24 +8,24 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Entity
 @Table(name = "products")
-@Entity(name = "product")
 @NoArgsConstructor
 @Setter @Getter
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false)
+    @Column(name = "id")
     private Long id;
-    @Column(name = "name", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "name")
     private String name;
-    @Column(nullable = false)
+    @Column(name = "price")
     private BigDecimal price;
-    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description")
     private String description;
-    @Column(nullable = false)
+    @Column(name = "category")
     private String category;
-    @Column(name = "imageURL", nullable = false, columnDefinition = "text")
+    @Column(name = "imageURL", columnDefinition = "text")
     private String imageURL;
     @OneToMany(mappedBy = "product")
     private List<OrderItem> orderItems;

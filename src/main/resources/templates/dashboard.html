@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
@@ -9,12 +9,22 @@
     <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
+<div th:if="${param.successMessage}">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> <span th:text="${param.successMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
             <h1>Admin Dashboard</h1>
             <div class="action-buttons">
                 <a href="#" class="btn btn-primary btn-add" data-toggle="modal" data-target="#addProductModal">Add New Product</a>
+            </div>
+            <div class="action-buttons">
+                <a th:href="${/home}" class="btn btn-primary btn-add" data-toggle="modal" data-target="#addProductModal">Add New Product</a>
             </div>
             <table class="table">
                 <thead>
@@ -24,35 +34,18 @@
                     <th>Description</th>
                     <th>Price</th>
                     <th>Image</th>
-                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Product 1</td>
-                    <td>Product 1 description</td>
-                    <td>$29.99</td>
-                    <td><img src="https://via.placeholder.com/150" alt="Product Image"></td>
+                <tr th:each="product : ${productList}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="'₦' +${product.price}"></td>
+                    <td><img th:height="100px" th:width="100px" th:src="@{${product.imageURL}}" alt="Product Image"></td>
                     <td>
                         <!-- <a href="#" class="btn btn-primary btn-edit">Edit</a> -->
                         <!-- Button trigger edit modal -->
-                        <a href="#" class="btn btn-primary btn-edit" data-toggle="modal" data-target="#editProductModal">Edit</a>
-                        <a href="#" class="btn btn-danger btn-delete">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Product 2</td>
-                    <td>Product 2 description</td>
-                    <td>$19.99</td>
-                    <td><img src="https://via.placeholder.com/150" alt="Product Image"></td>
-                    <td>
-                        <!-- <a href="#" class="btn btn-primary btn-edit">Edit</a> -->
-                        <!-- Button trigger edit modal -->
-                        <a href="#" class="btn btn-primary btn-edit" data-toggle="modal" data-target="#editProductModal" data-id="1" data-name="Product 1" data-description="Product 1 description" data-price="29.99" data-image="https://via.placeholder.com/150">
-                            Edit
-                        </a>
+                        <a th:href="@{/}" class="btn btn-primary btn-edit" data-toggle="modal" data-target="#editProductModal">Edit</a>
                         <a href="#" class="btn btn-danger btn-delete">Delete</a>
                     </td>
                 </tr>
@@ -114,28 +107,33 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form th:action="@{/save-product}" th:object="${productDTO}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="productName">Product Name</label>
-                        <input type="text" class="form-control" id="productName" placeholder="Enter product name">
+                        <input th:field="${productDTO.name}" type="text" class="form-control" id="productName" placeholder="Enter product name" th:required>
                     </div>
                     <div class="form-group">
                         <label for="productDescription">Product Description</label>
-                        <textarea class="form-control" id="productDescription" rows="3" placeholder="Enter product description"></textarea>
+                        <textarea th:field="${productDTO.description}" class="form-control" id="productDescription" rows="3" placeholder="Enter product description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory">Product Category</label>
+                        <textarea th:field="${productDTO.category}" class="form-control" id="productCategory" rows="3" placeholder="Enter product category" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="productPrice">Price</label>
-                        <input type="text" class="form-control" id="productPrice" placeholder="Enter product price">
+                        <input th:field="${productDTO.price}" type="text" class="form-control" id="productPrice" placeholder="Enter product price" required>
                     </div>
                     <div class="form-group">
                         <label for="productImage">Image</label>
-                        <input type="file" class="form-control" id="productImage" placeholder="Enter product image URL">
+                        <input th:name="productImage" type="file" class="form-control" id="productImage" placeholder="Enter product image">
+                    </div>
+<!--                    <button type="submit">Submit</button>-->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="saveAddProduct">Save</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="saveAddProduct">Save</button>
             </div>
         </div>
     </div>

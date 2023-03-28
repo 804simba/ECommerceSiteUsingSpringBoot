@@ -1,4 +1,4 @@
-package com.timolisa.ecommercesite.entity;
+package com.timolisa.ecommercesite.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -6,23 +6,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
-@Entity(name = "orderItem")
-@Table(name = "order_items")
+@Table(name = "orders")
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderItem {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false)
     private Long id;
     @ManyToOne(optional = false)
-    private Order order;
-    @ManyToOne(optional = false)
-    private Product product;
+    private User user;
     @Column(nullable = false)
-    private Integer quantity;
+    private LocalDateTime orderDate;
     @Column(nullable = false)
-    private BigDecimal unitPrice;
+    private BigDecimal subtotal;
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems;
 }

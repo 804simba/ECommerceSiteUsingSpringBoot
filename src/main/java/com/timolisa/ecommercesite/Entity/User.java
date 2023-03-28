@@ -1,4 +1,4 @@
-package com.timolisa.ecommercesite.entity;
+package com.timolisa.ecommercesite.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
