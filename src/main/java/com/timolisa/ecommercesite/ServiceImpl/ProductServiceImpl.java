@@ -2,6 +2,7 @@ package com.timolisa.ecommercesite.ServiceImpl;
 
 import com.timolisa.ecommercesite.DTO.ProductDTO;
 import com.timolisa.ecommercesite.Entity.Product;
+import com.timolisa.ecommercesite.Exception.ProductNotFoundException;
 import com.timolisa.ecommercesite.Repository.ProductRepo;
 import com.timolisa.ecommercesite.Services.ProductService;
 
@@ -36,9 +37,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<ProductDTO> findProductById(Long id) {
-        Optional<Product> product = productRepo.findById(id);
-        return product.map(p -> modelMapper.map(p, ProductDTO.class));
+    public ProductDTO findProductById(Long id) throws ProductNotFoundException {
+        Optional<Product> optionalProduct = productRepo.findById(id);
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            return modelMapper.map(product, ProductDTO.class);
+        } else {
+            String message = String.format("Product with ID: %d, not found", id);
+            throw new ProductNotFoundException(message);
+        }
     }
 
     @Override

@@ -3,14 +3,12 @@ package com.timolisa.ecommercesite.Controller;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.timolisa.ecommercesite.DTO.ProductDTO;
+import com.timolisa.ecommercesite.Exception.ProductNotFoundException;
 import com.timolisa.ecommercesite.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -54,6 +52,21 @@ public class DashboardController {
         // add success message
         redirectAttributes.addFlashAttribute("successMessage", "Product saved successfully");
         redirectAttributes.addFlashAttribute("products", productService.findAllProducts());
+        return "redirect:/dashboard";
+    }
+    @GetMapping("/edit-product/{id}")
+    public String editProduct(@PathVariable("id") Long id, Model model) {
+        try {
+            ProductDTO productDTO = productService.findProductById(id);
+            model.addAttribute("productDTO", productDTO);
+            return "edit-product";
+        } catch (ProductNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @GetMapping("/delete-product/{id}")
+    public String deleteProduct(@PathVariable("id") Long id) {
+        productService.deleteByID(id);
         return "redirect:/dashboard";
     }
 

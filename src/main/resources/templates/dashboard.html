@@ -18,13 +18,13 @@
 
 <div class="container mt-5">
     <div class="row">
+        <div class="action-buttons">
+            <a th:href="@{/home}" class="btn btn-lg btn-outline-primary">Home</a>
+        </div>
         <div class="col-md-12">
             <h1>Admin Dashboard</h1>
             <div class="action-buttons">
                 <a href="#" class="btn btn-primary btn-add" data-toggle="modal" data-target="#addProductModal">Add New Product</a>
-            </div>
-            <div class="action-buttons">
-                <a th:href="${/home}" class="btn btn-primary btn-add" data-toggle="modal" data-target="#addProductModal">Add New Product</a>
             </div>
             <table class="table">
                 <thead>
@@ -43,10 +43,8 @@
                     <td th:text="'₦' +${product.price}"></td>
                     <td><img th:height="100px" th:width="100px" th:src="@{${product.imageURL}}" alt="Product Image"></td>
                     <td>
-                        <!-- <a href="#" class="btn btn-primary btn-edit">Edit</a> -->
-                        <!-- Button trigger edit modal -->
-                        <a th:href="@{/}" class="btn btn-primary btn-edit" data-toggle="modal" data-target="#editProductModal">Edit</a>
-                        <a href="#" class="btn btn-danger btn-delete">Delete</a>
+                        <a th:href="@{/edit-product/{id}(id=${product.id})}" class="btn btn-primary btn-edit">Edit</a>
+                        <a th:href="@{/delete-product/{productId}(productId=${productDTO.id})}" class="btn btn-danger btn-delete" data-product-id="${productDTO.id}">Delete</a>
                     </td>
                 </tr>
                 </tbody>
