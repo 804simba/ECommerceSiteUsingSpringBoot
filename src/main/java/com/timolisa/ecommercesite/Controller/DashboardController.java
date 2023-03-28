@@ -29,6 +29,7 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
+        model.addAttribute("successMessage", (String)model.asMap().get("successMessage"));
         model.addAttribute("productDTO", new ProductDTO());
         model.addAttribute("productList", productService.findAllProducts());
         return "dashboard";
@@ -38,9 +39,6 @@ public class DashboardController {
     public String addProduct(@ModelAttribute("product") ProductDTO productDTO,
                              @RequestParam("productImage") MultipartFile imageFile,
                              RedirectAttributes redirectAttributes) throws IOException {
-//        Map uploadResult = cloudinary.uploader().upload(imageFile.getBytes(), ObjectUtils.emptyMap());
-//        Map<>
-//        String publicId = (String) uploadResult.get("public_id");
         String publicID = cloudinary.uploader()
                         .upload(imageFile.getBytes(),
                                 Map.of("public_id", UUID.randomUUID().toString()))
