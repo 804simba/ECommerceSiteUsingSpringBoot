@@ -1,7 +1,6 @@
 package com.timolisa.ecommercesite.Controller;
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.timolisa.ecommercesite.DTO.ProductDTO;
 import com.timolisa.ecommercesite.Exception.ProductNotFoundException;
 import com.timolisa.ecommercesite.Services.ProductService;
@@ -44,7 +43,6 @@ public class DashboardController {
                                 Map.of("public_id", UUID.randomUUID().toString()))
                                 .get("url").toString();
         productDTO.setImageURL(publicID);
-        System.out.println("this is my DTO " + productDTO);
         productService.saveAndFlush(productDTO);
 
         // add success message

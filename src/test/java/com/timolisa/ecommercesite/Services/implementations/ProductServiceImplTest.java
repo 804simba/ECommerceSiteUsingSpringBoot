@@ -2,8 +2,8 @@ package com.timolisa.ecommercesite.Services.implementations;
 
 import com.timolisa.ecommercesite.DTO.ProductDTO;
 import com.timolisa.ecommercesite.Entity.Product;
+import com.timolisa.ecommercesite.Repository.ProductRepository;
 import com.timolisa.ecommercesite.ServiceImpl.ProductServiceImpl;
-import com.timolisa.ecommercesite.Repository.ProductRepo;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -17,7 +17,7 @@ class ProductServiceImplTest {
     @InjectMocks
     private ProductServiceImpl productService;
     @Mock
-    private ProductRepo productRepo;
+    private ProductRepository productRepository;
     @Test
     void save() {
         // create a new ProductDTO object
@@ -37,13 +37,13 @@ class ProductServiceImplTest {
 
         // Mock the save method of the product Repository
         // to return the saved product object
-        when(productRepo.save(product)).thenReturn(product);
+        when(productRepository.save(product)).thenReturn(product);
 
         // then call the save method of the productService
         // implementation with the productDTO object
         ProductDTO savedProductDTO = productService.save(productDTO);
         // Verify that the save method was called on the ProductRepo repository with the same Product object
-        verify(productRepo, times(1)).save(product);
+        verify(productRepository, times(1)).save(product);
 
         // Verify that the returned ProductDTO object is not null
         assertNotNull(savedProductDTO);

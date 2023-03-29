@@ -3,7 +3,7 @@ package com.timolisa.ecommercesite.ServiceImpl;
 import com.timolisa.ecommercesite.DTO.ProductDTO;
 import com.timolisa.ecommercesite.Entity.Product;
 import com.timolisa.ecommercesite.Exception.ProductNotFoundException;
-import com.timolisa.ecommercesite.Repository.ProductRepo;
+import com.timolisa.ecommercesite.Repository.ProductRepository;
 import com.timolisa.ecommercesite.Services.ProductService;
 
 import org.modelmapper.ModelMapper;
@@ -19,18 +19,18 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
-    private final ProductRepo productRepo;
+    private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public ProductServiceImpl(ProductRepo productRepo, ModelMapper modelMapper) {
-        this.productRepo = productRepo;
+    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
+        this.productRepository = productRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
     public List<ProductDTO> findAllProducts() {
-        List<Product> products = productRepo.findAll();
+        List<Product> products = productRepository.findAll();
         return products.stream()
                 .map(product -> modelMapper.map(product, ProductDTO.class))
                 .collect(Collectors.toList());
@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO findProductById(Long id) throws ProductNotFoundException {
-        Optional<Product> optionalProduct = productRepo.findById(id);
+        Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
             return modelMapper.map(product, ProductDTO.class);
@@ -60,15 +60,14 @@ public class ProductServiceImpl implements ProductService {
         product.setCategory(productDTO.getCategory());
         product.setImageURL(productDTO.getImageURL());
         System.out.println("Product i want to save" + product);
-        product = productRepo.save(product);
-        System.out.println("Product saved");
+        product = productRepository.save(product);
         return modelMapper.map(product, ProductDTO.class);
     }
 
     @Override
     public boolean deleteByID(Long id) {
-        if (productRepo.existsById(id)) {
-            productRepo.deleteById(id);
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
             return true;
         }
         return false;
