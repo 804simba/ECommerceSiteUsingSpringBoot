@@ -5,7 +5,6 @@ import com.timolisa.ecommercesite.Exception.ProductNotFoundException;
 import com.timolisa.ecommercesite.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +25,7 @@ public class CartController {
     }
     @GetMapping("/add/{id}")
     public String addToCart(@PathVariable Long id,
-                            @RequestParam(name = "quantity", defaultValue = "1") int quantity) throws ProductNotFoundException {
+                            @RequestParam(name = "quantity", defaultValue = "1") int quantity) {
         if (cart.containsKey(id)) {
             cart.put(id, cart.get(id) + quantity);
         } else {
