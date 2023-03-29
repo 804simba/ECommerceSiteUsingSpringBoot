@@ -28,7 +28,7 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
-        model.addAttribute("successMessage", (String)model.asMap().get("successMessage"));
+        model.addAttribute("successMessage", model.asMap().get("successMessage"));
         model.addAttribute("productDTO", new ProductDTO());
         model.addAttribute("productList", productService.findAllProducts());
         return "dashboard";
