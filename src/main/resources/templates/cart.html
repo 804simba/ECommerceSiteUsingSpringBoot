@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Cart Items</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.html">Brand</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Cart Items</h1>
+      <div th:each="cartItem : ${cartItems}" class="cart-item">
+        <img width="300px" height="200px" th:src="${cartItem.key.imageURL}" alt="Product Image" class="cart-item-img">
+        <p class="cart-item-title" th:text="${cartItem.key.name}"></p>
+        <p class="cart-item-price" th:text="${cartItem.key.price}"></p>
+        <div class="cart-item-quantity">
+          <label for="quantity" th:text="${'Quantity: ' + cartItem.key.quantity}"></label>
+          <input type="number" id="quantity" name="quantity" min="1" th:value="${cartItem.key.quantity}">
+        </div>
+        <div class="cart-item-actions">
+          <button class="btn btn-primary">Update</button>
+          <button class="btn btn-danger cart-item-remove">Remove</button>
+        </div>
+<!--        <p class="cart-item-total" th:text="${'Total: $' + (cartItem.key.price * cartItem.key.quantity)}"></p>-->
+        <p class="cart-item-total" th:text="${'Total: $' + (cartItem.key.price * cartItem.value)}"></p>
+      </div>
+      <div class="cart-total">
+        <p>Total: $29.99</p>
+      </div>
+      <div class="cart-actions">
+        <a href="#" class="btn btn-primary">Continue Shopping</a>
+        <a href="#" class="btn btn-secondary">Go to Checkout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

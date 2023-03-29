@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "user")
@@ -40,5 +41,5 @@ public class User {
         return BCrypt.checkpw(password, hashedPassword);
     }
     @OneToMany(mappedBy = "user")
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 }
