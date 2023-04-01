@@ -5,6 +5,7 @@ import com.timolisa.ecommercesite.DTO.ProductDTO;
 import com.timolisa.ecommercesite.Exception.ProductNotFoundException;
 import com.timolisa.ecommercesite.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
+    @ResponseStatus(HttpStatus.OK)
     public String dashboard(Model model) {
         model.addAttribute("successMessage", model.asMap().get("successMessage"));
         model.addAttribute("productDTO", new ProductDTO());
@@ -35,6 +37,7 @@ public class DashboardController {
     }
 
     @PostMapping("/save-product")
+    @ResponseStatus(HttpStatus.CREATED)
     public String addProduct(@ModelAttribute("product") ProductDTO productDTO,
                              @RequestParam("productImage") MultipartFile imageFile,
                              RedirectAttributes redirectAttributes) throws IOException {
@@ -51,6 +54,7 @@ public class DashboardController {
         return "redirect:/dashboard";
     }
     @GetMapping("/edit-product/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public String editProduct(@PathVariable("id") Long id, Model model) {
         try {
             ProductDTO productDTO = productService.findProductById(id);
@@ -60,6 +64,7 @@ public class DashboardController {
             throw new RuntimeException(e);
         }
     }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @GetMapping("/delete-product/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
         productService.deleteByID(id);

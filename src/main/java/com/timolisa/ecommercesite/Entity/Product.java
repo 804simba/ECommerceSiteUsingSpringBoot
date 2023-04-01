@@ -27,6 +27,8 @@ public class Product {
     private String description;
     @Column(name = "category")
     private String category;
+    @Column(name = "quantity")
+    private Long quantity;
     @Column(name = "imageURL", columnDefinition = "text")
     private String imageURL;
     @ManyToMany(mappedBy = "products")
