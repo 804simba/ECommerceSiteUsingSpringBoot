@@ -1,6 +1,5 @@
 package com.timolisa.ecommercesite.ServiceImpl;
 
-import com.timolisa.ecommercesite.DTO.ProductDTO;
 import com.timolisa.ecommercesite.DTO.UserDTO;
 import com.timolisa.ecommercesite.Entity.User;
 import com.timolisa.ecommercesite.Repository.UserRepository;

@@ -57,7 +57,7 @@ public class UserController {
         } else {
             HttpSession session = request.getSession();
             Long id = user.getUserID();
-            session.setAttribute("userID", id);
+            session.setAttribute("userId", id);
             return "redirect:/home";
         }
     }

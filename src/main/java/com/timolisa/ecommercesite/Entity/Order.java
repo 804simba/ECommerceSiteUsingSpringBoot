@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Table(name = "orders")
@@ -20,9 +19,14 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long order_id;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne
+    private Cart cart;
+
     @ManyToMany
     @JoinTable(
             name = "order_product",
@@ -30,8 +34,10 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> products = new HashSet<>();
+
     @Column(nullable = false)
     private LocalDateTime orderDate;
+
     @Column(nullable = false)
     private BigDecimal subtotal;
 }

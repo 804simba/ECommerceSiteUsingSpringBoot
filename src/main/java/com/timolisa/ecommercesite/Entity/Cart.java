@@ -1,6 +1,8 @@
 package com.timolisa.ecommercesite.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -8,7 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "carts")
+@Getter
+@Setter
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +20,11 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToMany
-    @JoinTable (
-            name = "cart_product",
-            joinColumns = @JoinColumn(name = "cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private Set<Product> products = new HashSet<>();
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartItem> cartItems = new HashSet<>();
+
+    @Column(name = "total_price", nullable = false)
     private BigDecimal totalPrice = BigDecimal.ZERO;
 
     private LocalDateTime createdAt;

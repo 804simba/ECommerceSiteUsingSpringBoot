@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
               <label for="username">Username:</label>
-              <input type="text" th:field="*{email}" class="form-control" id="username">
+              <input type="email" th:field="*{email}" class="form-control" id="username">
             </div>
             <div class="form-group">
               <label for="password">Password:</label>
@@ -58,7 +58,7 @@
             </div>
             <div class="form-group">
               <label for="repeatPassword">Repeat password:</label>
-              <input type="text" th:field="*{repeatPassword}" class="form-control" id="repeatPassword">
+              <input type="password" th:field="*{repeatPassword}" class="form-control" id="repeatPassword">
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
           </form>

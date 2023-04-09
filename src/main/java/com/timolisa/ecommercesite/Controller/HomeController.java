@@ -2,6 +2,7 @@ package com.timolisa.ecommercesite.Controller;
 
 import com.timolisa.ecommercesite.DTO.ProductDTO;
 import com.timolisa.ecommercesite.Services.ProductService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,10 @@ public class HomeController {
         this.productService = productService;
     }
     @GetMapping(value = {"/", "/home"})
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
+        if (session.getAttribute("userId") == null) {
+            return "redirect:/login";
+        }
         List<ProductDTO> products = productService.findAllProducts();
         model.addAttribute("products", products);
         return "index";
