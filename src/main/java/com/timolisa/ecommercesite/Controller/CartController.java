@@ -1,8 +1,6 @@
 package com.timolisa.ecommercesite.Controller;
 
-import com.timolisa.ecommercesite.DTO.CartDTO;
 import com.timolisa.ecommercesite.DTO.ProductDTO;
-import com.timolisa.ecommercesite.DTO.UserDTO;
 import com.timolisa.ecommercesite.Entity.*;
 import com.timolisa.ecommercesite.Exception.ProductNotFoundException;
 import com.timolisa.ecommercesite.Repository.CartItemRepository;
@@ -35,7 +33,6 @@ public class CartController {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-//    private final Map<Long, Integer> cart = new HashMap<>();
     @Autowired
     public CartController(ProductService productService,
                           CartRepository cartRepository,
@@ -50,30 +47,6 @@ public class CartController {
         this.orderRepository = orderRepository;
         this.modelMapper = modelMapper;
     }
-
-//    @GetMapping("/add/{id}")
-//    public String addToCart(@PathVariable Long id,
-//                            @RequestParam(name = "quantity", defaultValue = "1") int quantity) {
-//        if (cart.containsKey(id)) {
-//            cart.put(id, cart.get(id) + quantity);
-//        } else {
-//            cart.put(id, quantity);
-//        }
-//        return "redirect:/home";
-//    }
-//    @GetMapping
-//    public ModelAndView viewCart() throws ProductNotFoundException {
-//        Map<ProductDTO, Integer> cartItems = new HashMap<>();
-//        for (Long productId : cart.keySet()) {
-//            ProductDTO product = productService.findProductById(productId);
-//            int quantity = cart.get(productId);
-//            cartItems.put(product, quantity);
-//        }
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("cart");
-//        mav.addObject("cartItems", cartItems);
-//        return mav;
-//    }
 
     @GetMapping("/add/{id}")
     public String addToCart(@PathVariable Long id,
